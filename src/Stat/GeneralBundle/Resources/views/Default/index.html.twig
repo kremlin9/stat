@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<div class="container">
+
+    {% for game, stat in realtime %}
+        <h1>{{ game }}</h1>
+        <div id="hit_uniq_{{ game }}" style="width:100%; height:400px;"></div>
+
+        <script>
+
+        $(function () { 
+            $('#hit_uniq_{{ game }}').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Hits'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                series: [{
+                    name: 'Hits',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.hit }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}, {
+                    name: 'Uniqs',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.uniq }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}
+                ]
+            });
+        });
+
+        </script>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

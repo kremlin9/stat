@@ -1,0 +1,20 @@
+Stat\GeneralBundle\Entity\Realtime:
+    type: entity
+    table: realtime 
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        game:
+            type: string
+            length: 255
+        createdAt:
+            type: datetime
+            column: created_at
+        hit:
+            type: integer
+        uniq:
+            type: integer
+    lifecycleCallbacks: {  }

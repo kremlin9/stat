@@ -1,0 +1,4 @@
+stat_general:
+    resource: "@StatGeneralBundle/Resources/config/routing.yml"
+    prefix:   /
+
