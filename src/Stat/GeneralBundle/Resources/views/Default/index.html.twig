@@ -10,42 +10,100 @@
 </script>
 
 <div class="container">
+    <h1>Total stat</h1>
+    <div id="new_users_total" style="width:100%; height:400px;"></div>
+    <div id="hit_uniq_total" style="width:100%; height:400px;"></div>
 
-    {% for game, stat in realtime %}
-        <h1>{{ game }}</h1>
-        <div id="hit_uniq_{{ game }}" style="width:100%; height:400px;"></div>
-
-        <script>
-
-        $(function () { 
-            $('#hit_uniq_{{ game }}').highcharts({
-                chart: {
-                    type: 'line'
-                },
-                title: {
-                    text: 'Hits'
-                },
-                xAxis: {
-                    type: 'datetime'
-                },
-                series: [{
-                    name: 'Hits',
-                    data: [
-                        {% for time, rstat in stat %}
-                            [ {{ time }}, {{ rstat.hit }} ] {% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    ]}, {
-                    name: 'Uniqs',
-                    data: [
-                        {% for time, rstat in stat %}
-                            [ {{ time }}, {{ rstat.uniq }} ] {% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    ]}
-                ]
-            });
+    <script>
+    $(function () { 
+        // New Users total 
+        $('#hit_uniq_total').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'New Users'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            series: [{
+                name: 'Users',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.new_users }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
         });
 
-        </script>
+        // Hits & Uniqs
+        $('#hit_uniq_total').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Hits'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            series: [{
+                name: 'Hits',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.hit }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}, {
+                name: 'Uniqs',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.uniq }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
+        });
+    });
+    </script>
+
+
+    {% for game, stat in realtime %}
+        {% if game != 'total' %}
+            <h1>{{ game }}</h1>
+            <div id="hit_uniq_{{ game }}" style="width:100%; height:400px;"></div>
+
+            <script>
+
+            $(function () { 
+                $('#hit_uniq_{{ game }}').highcharts({
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Hits'
+                    },
+                    xAxis: {
+                        type: 'datetime'
+                    },
+                    series: [{
+                        name: 'Hits',
+                        data: [
+                            {% for time, rstat in stat %}
+                                [ {{ time }}, {{ rstat.hit }} ] {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        ]}, {
+                        name: 'Uniqs',
+                        data: [
+                            {% for time, rstat in stat %}
+                                [ {{ time }}, {{ rstat.uniq }} ] {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        ]}
+                    ]
+                });
+            });
+
+            </script>
+        {% endif %}
     {% endfor %}
 
 </div>

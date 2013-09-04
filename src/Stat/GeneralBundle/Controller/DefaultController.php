@@ -18,7 +18,7 @@ class DefaultController extends Controller
 
         foreach ($rstat as $s) {
             $realtime[ $s->getGame() ][ $s->getCreatedAt('epoch') * 1000 ] = array(
-                'hit' => $s->getHit(), 'uniq' => $s->getUniq()
+                'hit' => $s->getHit(), 'uniq' => $s->getUniq(), 'new_users' => $s->getNewUsers()
             );
         }
 
