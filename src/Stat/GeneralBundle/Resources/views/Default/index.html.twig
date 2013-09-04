@@ -1,5 +1,12 @@
 {% extends '::base.html.twig' %}
 {% block body %}
+
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+
 <div class="container">
 
     {% for game, stat in realtime %}
