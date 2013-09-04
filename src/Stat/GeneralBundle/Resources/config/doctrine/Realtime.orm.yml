@@ -17,4 +17,7 @@ Stat\GeneralBundle\Entity\Realtime:
             type: integer
         uniq:
             type: integer
+        newUsers:
+            type: integer
+            column: new_users 
     lifecycleCallbacks: {  }

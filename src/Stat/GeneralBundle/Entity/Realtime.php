@@ -144,4 +144,32 @@ class Realtime
     {
         return $this->uniq;
     }
+    /**
+     * @var integer
+     */
+    private $newUsers;
+
+
+    /**
+     * Set newUsers
+     *
+     * @param integer $newUsers
+     * @return Realtime
+     */
+    public function setNewUsers($newUsers)
+    {
+        $this->newUsers = $newUsers;
+    
+        return $this;
+    }
+
+    /**
+     * Get newUsers
+     *
+     * @return integer 
+     */
+    public function getNewUsers()
+    {
+        return $this->newUsers;
+    }
 }
