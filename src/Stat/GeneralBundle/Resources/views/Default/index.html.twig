@@ -16,6 +16,7 @@
 
     <div id="transactions_total" style="width:100%; height:400px;"></div>
     <div id="money_total" style="width:100%; height:400px;"></div>
+    <div id="payers_total" style="width:100%; height:400px;"></div>
 
     <script>
     $(function () { 
@@ -73,9 +74,6 @@
             title: {
                 text: 'Transactions'
             },
-            yAxis: {
-                title: { text: 'Transactions' }    
-            },
             xAxis: {
                 type: 'datetime'
             },
@@ -96,9 +94,6 @@
             title: {
                 text: 'Money'
             },
-            yAxis: {
-                title: { text: 'Money' }    
-            },
             xAxis: {
                 type: 'datetime'
             },
@@ -113,6 +108,26 @@
                 ]}
             ]
         });
+
+        // Payers 
+        $('#payers_total').highcharts({
+            title: {
+                text: 'Payers'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            series: [{
+                name: 'Payers',
+                type: 'column',
+                color: '#9c1e1e',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.payers }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
+        });
     });
     </script>
 
@@ -120,17 +135,23 @@
     {% for game, stat in realtime %}
         {% if game != 'total' %}
             <h1>{{ game }}</h1>
+
             <div id="hit_uniq_{{ game }}" style="width:100%; height:400px;"></div>
+
+            <div id="transactions_{{ game }}" style="width:100%; height:400px;"></div>
+            <div id="money_{{ game }}" style="width:100%; height:400px;"></div>
+            <div id="payers_{{ game }}" style="width:100%; height:400px;"></div>
 
             <script>
 
+            // Hits & Uniqs
             $(function () { 
                 $('#hit_uniq_{{ game }}').highcharts({
                     chart: {
                         type: 'line'
                     },
                     title: {
-                        text: 'Hits'
+                        text: 'Hits & Uniqs'
                     },
                     xAxis: {
                         type: 'datetime'
@@ -152,6 +173,66 @@
                 });
             });
 
+
+            // Transactions Total 
+            $('#transactions_{{ game }}').highcharts({
+                title: {
+                    text: 'Transactions'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                series: [{
+                    name: 'Transactions',
+                    type: 'column',
+                    color: '#9c1e1e',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.transactions_count }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}
+                ]
+            });
+
+            // Money
+            $('#money_{{ game }}').highcharts({
+                title: {
+                    text: 'Money'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                series: [{
+                    name: 'Money',
+                    type: 'column',
+                    color: '#9c1e1e',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.money }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}
+                ]
+            });
+
+            // Payers 
+            $('#payers_{{ game }}').highcharts({
+                title: {
+                    text: 'Payers'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                series: [{
+                    name: 'Payers',
+                    type: 'column',
+                    color: '#9c1e1e',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.payers }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}
+                ]
+            });
             </script>
         {% endif %}
     {% endfor %}
