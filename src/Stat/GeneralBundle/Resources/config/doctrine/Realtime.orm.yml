@@ -20,4 +20,10 @@ Stat\GeneralBundle\Entity\Realtime:
         newUsers:
             type: integer
             column: new_users 
+        transactionsCount:
+            type: integer
+            column: transactions_count 
+        money:
+            type: integer
+            column: money 
     lifecycleCallbacks: {  }
