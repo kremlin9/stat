@@ -13,9 +13,12 @@ class DefaultController extends Controller
             ->getRepository('StatGeneralBundle:Realtime');
         
         $time = time() - 60 * 60 * 24;
+        $dt = new \DateTime();
+        $dt->setTimestamp($time);
 
         $query = $rep->createQueryBuilder('p')
-            ->where("p.createdAt > $time")
+            ->where("p.createdAt > :time")
+            ->setParameter('time', $dt->format('Y-m-d H:i'))
             ->getQuery();
 
         $rstat = $query->getResult();
