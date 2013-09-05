@@ -26,4 +26,7 @@ Stat\GeneralBundle\Entity\Realtime:
         money:
             type: integer
             column: money 
+        payer:
+            type: integer
+            column: payer 
     lifecycleCallbacks: {  }

@@ -12,7 +12,14 @@ class DefaultController extends Controller
         $rep = $this->getDoctrine()
             ->getRepository('StatGeneralBundle:Realtime');
         
-        $rstat = $rep->findAll();
+        $time = time() - 60 * 60 * 24;
+
+        $query = $rep->createQueryBuilder('p')
+            ->where("p.createdAt > $time")
+            ->getQuery();
+
+        $rstat = $query->getResult();
+
         
         $realtime = array();
 

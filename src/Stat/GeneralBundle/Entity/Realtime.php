@@ -228,4 +228,32 @@ class Realtime
     {
         return $this->money;
     }
+    /**
+     * @var integer
+     */
+    private $payer;
+
+
+    /**
+     * Set payer
+     *
+     * @param integer $payer
+     * @return Realtime
+     */
+    public function setPayer($payer)
+    {
+        $this->payer = $payer;
+    
+        return $this;
+    }
+
+    /**
+     * Get payer
+     *
+     * @return integer 
+     */
+    public function getPayer()
+    {
+        return $this->payer;
+    }
 }
