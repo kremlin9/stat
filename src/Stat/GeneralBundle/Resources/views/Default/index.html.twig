@@ -13,6 +13,7 @@
     <h1>Total stat</h1>
     <div id="new_users_total" style="width:100%; height:400px;"></div>
     <div id="hit_uniq_total" style="width:100%; height:400px;"></div>
+    <div id="money_total" style="width:100%; height:400px;"></div>
 
     <script>
     $(function () { 
@@ -43,7 +44,7 @@
                 type: 'line'
             },
             title: {
-                text: 'Hits'
+                text: 'Hits & Uniqs'
             },
             xAxis: {
                 type: 'datetime'
@@ -63,6 +64,41 @@
                 ]}
             ]
         });
+
+        // Money 
+        $('#money_total').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Transactions & Money'
+            },
+            yAxis: [{
+                title: { text: 'Transactions' }    
+            }, {
+                title: { text: 'Money' },
+                opposite: true
+            }],
+            xAxis: {
+                type: 'datetime'
+            },
+            series: [{
+                name: 'Transactions',
+                yAxis: 1,
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.transactions_count }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}, {
+                name: 'Money',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.money }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]},
+            ]
+        });
+
     });
     </script>
 
