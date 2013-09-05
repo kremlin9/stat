@@ -32,6 +32,7 @@
             },
             series: [{
                 name: 'Users',
+                color: '#5da130',
                 data: [
                     {% for time, rstat in realtime.total %}
                         [ {{ time }}, {{ rstat.new_users }} ] {% if not loop.last %}, {% endif %}
@@ -81,6 +82,7 @@
             series: [{
                 name: 'Transactions',
                 type: 'column',
+                color: '#9c1e1e',
                 data: [
                     {% for time, rstat in realtime.total %}
                         [ {{ time }}, {{ rstat.transactions_count }} ] {% if not loop.last %}, {% endif %}
@@ -103,6 +105,7 @@
             series: [{
                 name: 'Money',
                 type: 'column',
+                color: '#9c1e1e',
                 data: [
                     {% for time, rstat in realtime.total %}
                         [ {{ time }}, {{ rstat.money }} ] {% if not loop.last %}, {% endif %}
