@@ -13,6 +13,8 @@
     <h1>Total stat</h1>
     <div id="new_users_total" style="width:100%; height:400px;"></div>
     <div id="hit_uniq_total" style="width:100%; height:400px;"></div>
+
+    <div id="transactions_total" style="width:100%; height:400px;"></div>
     <div id="money_total" style="width:100%; height:400px;"></div>
 
     <script>
@@ -65,40 +67,49 @@
             ]
         });
 
-        // Money 
-        $('#money_total').highcharts({
-            chart: {
-                type: 'column'
-            },
+        // Transactions Total 
+        $('#transactions_total').highcharts({
             title: {
-                text: 'Transactions & Money'
+                text: 'Transactions'
             },
-            yAxis: [{
+            yAxis: {
                 title: { text: 'Transactions' }    
-            }, {
-                title: { text: 'Money' },
-                opposite: true
-            }],
+            },
             xAxis: {
                 type: 'datetime'
             },
             series: [{
                 name: 'Transactions',
-                yAxis: 1,
+                type: 'column',
                 data: [
                     {% for time, rstat in realtime.total %}
                         [ {{ time }}, {{ rstat.transactions_count }} ] {% if not loop.last %}, {% endif %}
                     {% endfor %}
-                ]}, {
+                ]}
+            ]
+        });
+
+        // Money
+        $('#money_total').highcharts({
+            title: {
+                text: 'Money'
+            },
+            yAxis: {
+                title: { text: 'Money' }    
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            series: [{
                 name: 'Money',
+                type: 'column',
                 data: [
                     {% for time, rstat in realtime.total %}
                         [ {{ time }}, {{ rstat.money }} ] {% if not loop.last %}, {% endif %}
                     {% endfor %}
-                ]},
+                ]}
             ]
         });
-
     });
     </script>
 
