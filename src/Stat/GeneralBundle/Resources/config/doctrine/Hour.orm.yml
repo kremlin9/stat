@@ -1,0 +1,29 @@
+Stat\GeneralBundle\Entity\Hour:
+    type: entity
+    table: hour 
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        game:
+            type: string
+            length: 255
+        hit:
+            type: integer
+        uniq:
+            type: integer
+        newUsers:
+            type: integer
+            column: new_users
+        transactionsCount:
+            type: integer
+            column: transactions_count
+        money:
+            type: integer
+        payer:
+            type: integer
+        created_at:
+            type: datetime
+    lifecycleCallbacks: {  }
