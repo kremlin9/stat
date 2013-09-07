@@ -1,7 +1,7 @@
-home:
-    pattern:  /
+realtime:
+    pattern:  /realtime
     defaults: { _controller: StatGeneralBundle:Default:index }
 
-home:
+hours:
     pattern:  /hours
     defaults: { _controller: StatGeneralBundle:Default:hours }
