@@ -1,3 +1,7 @@
 home:
     pattern:  /
     defaults: { _controller: StatGeneralBundle:Default:index }
+
+home:
+    pattern:  /hours
+    defaults: { _controller: StatGeneralBundle:Default:hours }

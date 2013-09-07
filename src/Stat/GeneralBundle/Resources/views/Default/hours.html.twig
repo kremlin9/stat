@@ -1,0 +1,183 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+
+<script>
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+</script>
+
+<div class="container">
+    <div class="page-header" style="color: #92000a">
+        <h1>Total statistics</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Hits & Uniqs</h3>
+            <div id="hit_uniq_total" style="width:100%; height:400px;"></div>
+
+            <h3>Transactions</h3>
+            <div id="transactions_total" style="width:100%; height:400px;"></div>
+
+            <h3>Money</h3>
+            <div id="money_total" style="width:100%; height:400px;"></div>
+        </div>
+    </div>
+
+    <script>
+    $(function () { 
+        // Hits & Uniqs
+        $('#hit_uniq_total').highcharts({
+            title: { text: '' },
+            chart: {
+                type: 'line'
+            },
+            xAxis: {
+                type: 'datetime'
+            },
+            series: [{
+                name: 'Hits',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.hit }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
+        });
+
+        // Transactions Total 
+        $('#transactions_total').highcharts({
+            title: { text: '' },
+            xAxis: {
+                type: 'datetime'
+            },
+            legend: { enabled: false },
+            series: [{
+                name: 'Transactions',
+                type: 'column',
+                color: '#9c1e1e',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.transactions_count }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
+        });
+
+        // Money
+        $('#money_total').highcharts({
+            title: { text: '' },
+            xAxis: {
+                type: 'datetime'
+            },
+            legend: { enabled: false },
+            series: [{
+                name: 'Money',
+                type: 'column',
+                color: '#9c1e1e',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.money }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
+        });
+    });
+    </script>
+
+
+    {% for game, stat in realtime %}
+        {% if game != 'total' %}
+            <div class="page-header" style="color: #92000a">
+                <h1>{{ game }}</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>{{ game }}: Hits & Uniqs</h3>
+                    <div id="hit_uniq_{{ game }}" style="width:100%; height:400px;"></div>
+
+                    <h3>{{ game }}: Transactions</h3>
+                    <div id="transactions_{{ game }}" style="width:100%; height:400px;"></div>
+
+                    <h3>{{ game }}: Money</h3>
+                    <div id="money_{{ game }}" style="width:100%; height:400px;"></div>
+                </div>
+            </div>
+
+            <script>
+
+            // Hits & Uniqs
+            $(function () { 
+                $('#hit_uniq_{{ game }}').highcharts({
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Hits & Uniqs'
+                    },
+                    xAxis: {
+                        type: 'datetime'
+                    },
+                    series: [{
+                        name: 'Hits',
+                        data: [
+                            {% for time, rstat in stat %}
+                                [ {{ time }}, {{ rstat.hit }} ] {% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        ]}
+                    ]
+                });
+            });
+
+
+            // Transactions Total 
+            $('#transactions_{{ game }}').highcharts({
+                title: {
+                    text: 'Transactions'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                legend: { enabled: false },
+                series: [{
+                    name: 'Transactions',
+                    type: 'column',
+                    color: '#9c1e1e',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.transactions_count }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}
+                ]
+            });
+
+            // Money
+            $('#money_{{ game }}').highcharts({
+                title: {
+                    text: 'Money'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                legend: { enabled: false },
+                series: [{
+                    name: 'Money',
+                    type: 'column',
+                    color: '#9c1e1e',
+                    data: [
+                        {% for time, rstat in stat %}
+                            [ {{ time }}, {{ rstat.money }} ] {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    ]}
+                ]
+            });
+            </script>
+        {% endif %}
+    {% endfor %}
+
+</div>
+
+{% endblock %}

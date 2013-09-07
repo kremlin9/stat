@@ -244,8 +244,15 @@ class Hour
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
+    public function getCreatedAt($format = null) {
+        if ($format == 'ymd') {
+            return $this->created_at->format('Y-m-d');
+        } else if ($format == 'ymd hi') {
+            return $this->created_at->format('Y-m-d H:i');
+        } else if ($format == 'epoch') {
+            return $this->created_at->format('U');
+        } else {
+            return $this->created_at;
+        }
     }
 }

@@ -4,10 +4,9 @@ namespace Stat\GeneralBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
-{
-    public function indexAction()
-    {
+class DefaultController extends Controller {
+
+    public function indexAction() {
         # Get stat
         $rep = $this->getDoctrine()
             ->getRepository('StatGeneralBundle:Realtime');
@@ -34,6 +33,36 @@ class DefaultController extends Controller
         }
 
         return $this->render('StatGeneralBundle:Default:index.html.twig', array(
+            'realtime' => $realtime
+        ));
+    }
+
+
+    public function hoursAction() {
+        # Get stat
+        $rep = $this->getDoctrine()
+            ->getRepository('StatGeneralBundle:Hour');
+        
+        $dt = new \DateTime();
+        $dt->setTimestamp( time() );
+
+        $query = $rep->createQueryBuilder('p')
+            ->where("p.created_at > :time")
+            ->setParameter('time', $dt->format('Y-m-d 00:00'))
+            ->getQuery();
+
+        $rstat = $query->getResult();
+
+        
+        $hour = array();
+
+        foreach ($rstat as $s) {
+            $realtime[ $s->getGame() ][ $s->getCreatedAt('epoch') * 1000 ] = array(
+                'hit' => $s->getHit(), 'transactions_count' => $s->getTransactionsCount(), 'money' => $s->getMoney(), 
+            );
+        }
+
+        return $this->render('StatGeneralBundle:Default:hours.html.twig', array(
             'realtime' => $realtime
         ));
     }
