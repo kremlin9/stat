@@ -21,19 +21,27 @@ class DefaultController extends Controller {
             ->getQuery();
 
         $rstat = $query->getResult();
-
         
         $realtime = array();
+        $banks = array();
+
+        $mc = $this->get('beryllium_cache');
 
         foreach ($rstat as $s) {
-            $realtime[ $s->getGame() ][ $s->getCreatedAt('epoch') * 1000 ] = array(
+            $game = $s->getGame();
+
+            $realtime[ $game ][ $s->getCreatedAt('epoch') * 1000 ] = array(
                 'hit' => $s->getHit(), 'uniq' => $s->getUniq(), 'new_users' => $s->getNewUsers(),
                 'transactions_count' => $s->getTransactionsCount(), 'money' => $s->getMoney(), 'payers' => $s->getPayer()
             );
+
+            $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
+            $banks[ $game ] = $bank;
         }
 
         return $this->render('StatGeneralBundle:Default:index.html.twig', array(
-            'realtime' => $realtime
+            'realtime' => $realtime,
+            'banks' => $banks
         ));
     }
 
