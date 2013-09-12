@@ -19,7 +19,7 @@
             {% for game, stat in realtime %}
                 {% if game != 'total' %}
                     <div style="display: inline-block; width: 100px;">
-                        <b>{{ game }}</b>: {{ banks[game] }}
+                        <b>{{ game }}</b>:<br /> {{ banks[game] }}
                     </div>
                 {% endif %}
             {% endfor %}
