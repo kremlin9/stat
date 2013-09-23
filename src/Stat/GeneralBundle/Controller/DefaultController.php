@@ -32,7 +32,8 @@ class DefaultController extends Controller {
 
             $realtime[ $game ][ $s->getCreatedAt('epoch') * 1000 ] = array(
                 'hit' => $s->getHit(), 'uniq' => $s->getUniq(), 'new_users' => $s->getNewUsers(),
-                'transactions_count' => $s->getTransactionsCount(), 'money' => $s->getMoney(), 'payers' => $s->getPayer()
+                'transactions_count' => $s->getTransactionsCount(), 'money' => $s->getMoney(), 'payers' => $s->getPayer(),
+                'bonus_time' => $s->getBonusTime()
             );
 
             $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
