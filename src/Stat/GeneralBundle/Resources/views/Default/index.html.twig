@@ -159,10 +159,10 @@
             series: [{
                 name: 'Bonus',
                 type: 'line',
-                color: '#9c1e1e',
+                color: '#9966cc',
                 data: [
                     {% for time, rstat in realtime.total %}
-                        [ {{ time }}, {{ rstat.bonusTime }} ] {% if not loop.last %}, {% endif %}
+                        [ {{ time }}, {{ rstat.bonus_time }} ] {% if not loop.last %}, {% endif %}
                     {% endfor %}
                 ]}
             ]
