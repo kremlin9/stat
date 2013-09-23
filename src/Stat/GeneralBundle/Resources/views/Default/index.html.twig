@@ -38,6 +38,9 @@
 
             <h3>Payers</h3>
             <div id="payers_total" style="width:100%; height:400px;"></div>
+
+            <h3>Bonus Time</h3>
+            <div id="bonus_time_total" style="width:100%; height:400px;"></div>
         </div>
     </div>
 
@@ -141,6 +144,25 @@
                 data: [
                     {% for time, rstat in realtime.total %}
                         [ {{ time }}, {{ rstat.payers }} ] {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                ]}
+            ]
+        });
+
+        // Bonus time 
+        $('#bonus_time_total').highcharts({
+            title: { text: '' },
+            xAxis: {
+                type: 'datetime'
+            },
+            legend: { enabled: false },
+            series: [{
+                name: 'Bonus',
+                type: 'line',
+                color: '#9c1e1e',
+                data: [
+                    {% for time, rstat in realtime.total %}
+                        [ {{ time }}, {{ rstat.bonusTime }} ] {% if not loop.last %}, {% endif %}
                     {% endfor %}
                 ]}
             ]
