@@ -256,4 +256,32 @@ class Realtime
     {
         return $this->payer;
     }
+    /**
+     * @var integer
+     */
+    private $bonusTime;
+
+
+    /**
+     * Set bonusTime
+     *
+     * @param integer $bonusTime
+     * @return Realtime
+     */
+    public function setBonusTime($bonusTime)
+    {
+        $this->bonusTime = $bonusTime;
+    
+        return $this;
+    }
+
+    /**
+     * Get bonusTime
+     *
+     * @return integer 
+     */
+    public function getBonusTime()
+    {
+        return $this->bonusTime;
+    }
 }

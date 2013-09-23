@@ -29,4 +29,7 @@ Stat\GeneralBundle\Entity\Realtime:
         payer:
             type: integer
             column: payer 
+        bonusTime:
+            type: integer
+            column: bonus_time 
     lifecycleCallbacks: {  }
