@@ -1,6 +1,6 @@
-Stat\GeneralBundle\Entity\Realtime:
+Stat\GeneralBundle\Entity\Day:
     type: entity
-    table: realtime 
+    table: day 
     fields:
         id:
             type: integer
@@ -10,28 +10,30 @@ Stat\GeneralBundle\Entity\Realtime:
         game:
             type: string
             length: 255
-        createdAt:
-            type: datetime
-            column: created_at
         hit:
             type: integer
         uniq:
             type: integer
         newUsers:
             type: integer
-            column: new_users 
+            column: new_users
         transactionsCount:
             type: integer
-            column: transactions_count 
+            column: transactions_count
         money:
             type: integer
-            column: money 
         payer:
             type: integer
-            column: payer 
+        arpu:
+            type: float
+        arppu:
+            type: float
+        createdAt:
+            type: datetime
+            column: created_at
         bonusTime:
             type: integer
-            column: bonus_time 
+            column: bonus_time
         bonusTimeUniq:
             type: integer
             column: bonus_time_uniq 

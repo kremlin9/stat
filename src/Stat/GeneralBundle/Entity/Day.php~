@@ -5,14 +5,19 @@ namespace Stat\GeneralBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Hour
+ * Day
  */
-class Hour
+class Day
 {
     /**
      * @var integer
      */
     private $id;
+
+    /**
+     * @var string
+     */
+    private $game;
 
     /**
      * @var integer
@@ -44,6 +49,26 @@ class Hour
      */
     private $payer;
 
+    /**
+     * @var float
+     */
+    private $arpu;
+
+    /**
+     * @var float
+     */
+    private $arppu;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var integer
+     */
+    private $bonusTime;
+
 
     /**
      * Get id
@@ -56,10 +81,33 @@ class Hour
     }
 
     /**
+     * Set game
+     *
+     * @param string $game
+     * @return Day
+     */
+    public function setGame($game)
+    {
+        $this->game = $game;
+    
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return string 
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+
+    /**
      * Set hit
      *
      * @param integer $hit
-     * @return Hour
+     * @return Day
      */
     public function setHit($hit)
     {
@@ -82,7 +130,7 @@ class Hour
      * Set uniq
      *
      * @param integer $uniq
-     * @return Hour
+     * @return Day
      */
     public function setUniq($uniq)
     {
@@ -105,7 +153,7 @@ class Hour
      * Set newUsers
      *
      * @param integer $newUsers
-     * @return Hour
+     * @return Day
      */
     public function setNewUsers($newUsers)
     {
@@ -128,7 +176,7 @@ class Hour
      * Set transactionsCount
      *
      * @param integer $transactionsCount
-     * @return Hour
+     * @return Day
      */
     public function setTransactionsCount($transactionsCount)
     {
@@ -151,7 +199,7 @@ class Hour
      * Set money
      *
      * @param integer $money
-     * @return Hour
+     * @return Day
      */
     public function setMoney($money)
     {
@@ -174,7 +222,7 @@ class Hour
      * Set payer
      *
      * @param integer $payer
-     * @return Hour
+     * @return Day
      */
     public function setPayer($payer)
     {
@@ -192,80 +240,81 @@ class Hour
     {
         return $this->payer;
     }
-    /**
-     * @var string
-     */
-    private $game;
-
 
     /**
-     * Set game
+     * Set arpu
      *
-     * @param string $game
-     * @return Hour
+     * @param float $arpu
+     * @return Day
      */
-    public function setGame($game)
+    public function setArpu($arpu)
     {
-        $this->game = $game;
+        $this->arpu = $arpu;
     
         return $this;
     }
 
     /**
-     * Get game
+     * Get arpu
      *
-     * @return string 
+     * @return float 
      */
-    public function getGame()
+    public function getArpu()
     {
-        return $this->game;
+        return $this->arpu;
     }
+
     /**
-     * @var \DateTime
+     * Set arppu
+     *
+     * @param float $arppu
+     * @return Day
      */
-    private $created_at;
-
+    public function setArppu($arppu)
+    {
+        $this->arppu = $arppu;
+    
+        return $this;
+    }
 
     /**
-     * Set created_at
+     * Get arppu
+     *
+     * @return float 
+     */
+    public function getArppu()
+    {
+        return $this->arppu;
+    }
+
+    /**
+     * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return Hour
+     * @return Day
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     
         return $this;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return \DateTime 
      */
-    public function getCreatedAt($format = null) {
-        if ($format == 'ymd') {
-            return $this->created_at->format('Y-m-d');
-        } else if ($format == 'ymd hi') {
-            return $this->created_at->format('Y-m-d H:i');
-        } else if ($format == 'epoch') {
-            return $this->created_at->format('U');
-        } else {
-            return $this->created_at;
-        }
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
-    /**
-     * @var integer
-     */
-    private $bonusTime;
-
 
     /**
      * Set bonusTime
      *
      * @param integer $bonusTime
-     * @return Hour
+     * @return Day
      */
     public function setBonusTime($bonusTime)
     {
@@ -282,33 +331,5 @@ class Hour
     public function getBonusTime()
     {
         return $this->bonusTime;
-    }
-    /**
-     * @var integer
-     */
-    private $bonusTimeUniq;
-
-
-    /**
-     * Set bonusTimeUniq
-     *
-     * @param integer $bonusTimeUniq
-     * @return Hour
-     */
-    public function setBonusTimeUniq($bonusTimeUniq)
-    {
-        $this->bonusTimeUniq = $bonusTimeUniq;
-    
-        return $this;
-    }
-
-    /**
-     * Get bonusTimeUniq
-     *
-     * @return integer 
-     */
-    public function getBonusTimeUniq()
-    {
-        return $this->bonusTimeUniq;
     }
 }

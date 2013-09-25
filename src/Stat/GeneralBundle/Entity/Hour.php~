@@ -244,8 +244,43 @@ class Hour
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
+    public function getCreatedAt($format = null) {
+        if ($format == 'ymd') {
+            return $this->created_at->format('Y-m-d');
+        } else if ($format == 'ymd hi') {
+            return $this->created_at->format('Y-m-d H:i');
+        } else if ($format == 'epoch') {
+            return $this->created_at->format('U');
+        } else {
+            return $this->created_at;
+        }
+    }
+    /**
+     * @var integer
+     */
+    private $bonusTime;
+
+
+    /**
+     * Set bonusTime
+     *
+     * @param integer $bonusTime
+     * @return Hour
+     */
+    public function setBonusTime($bonusTime)
     {
-        return $this->created_at;
+        $this->bonusTime = $bonusTime;
+    
+        return $this;
+    }
+
+    /**
+     * Get bonusTime
+     *
+     * @return integer 
+     */
+    public function getBonusTime()
+    {
+        return $this->bonusTime;
     }
 }

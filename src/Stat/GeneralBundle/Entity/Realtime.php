@@ -284,4 +284,32 @@ class Realtime
     {
         return $this->bonusTime;
     }
+    /**
+     * @var integer
+     */
+    private $bonusTimeUniq;
+
+
+    /**
+     * Set bonusTimeUniq
+     *
+     * @param integer $bonusTimeUniq
+     * @return Realtime
+     */
+    public function setBonusTimeUniq($bonusTimeUniq)
+    {
+        $this->bonusTimeUniq = $bonusTimeUniq;
+    
+        return $this;
+    }
+
+    /**
+     * Get bonusTimeUniq
+     *
+     * @return integer 
+     */
+    public function getBonusTimeUniq()
+    {
+        return $this->bonusTimeUniq;
+    }
 }

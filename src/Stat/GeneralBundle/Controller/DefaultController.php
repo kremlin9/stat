@@ -52,12 +52,13 @@ class DefaultController extends Controller {
         $rep = $this->getDoctrine()
             ->getRepository('StatGeneralBundle:Hour');
         
+        $time = time() - 60 * 60 * 24;
         $dt = new \DateTime();
-        $dt->setTimestamp( time() );
+        $dt->setTimestamp($time);
 
         $query = $rep->createQueryBuilder('p')
             ->where("p.created_at > :time")
-            ->setParameter('time', $dt->format('Y-m-d 00:00'))
+            ->setParameter('time', $dt->format('Y-m-d H:00'))
             ->getQuery();
 
         $rstat = $query->getResult();

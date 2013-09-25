@@ -26,4 +26,10 @@ Stat\GeneralBundle\Entity\Hour:
             type: integer
         created_at:
             type: datetime
+        bonusTime:
+            type: integer
+            column: bonus_time 
+        bonusTimeUniq:
+            type: integer
+            column: bonus_time_uniq 
     lifecycleCallbacks: {  }
