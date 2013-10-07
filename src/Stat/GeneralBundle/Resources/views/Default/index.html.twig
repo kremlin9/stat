@@ -18,7 +18,7 @@
             <h4>Banks</h4>
             {% for game, stat in realtime %}
                 {% if game != 'total' %}
-                    <div style="display: inline-block; width: 300px;">
+                    <div style="display: inline-block; width: 300px; margin-bottom: 10px;">
                         <b>{{ game }}</b>:<br /> 
                         bank: {{ banks[game] }}
                         <br />
@@ -26,8 +26,7 @@
                         <br />
                         out: {{ in_out[game]['out'] }}
                         <br />
-                        diff: {{ in_out[game]['diff'] }} ({{ in_out[game]['diff'] }}%)
-                        <br />
+                        diff: {{ in_out[game]['diff'] }} ({{ in_out[game]['diff_p'] }}%)
                     </div>
                 {% endif %}
             {% endfor %}
