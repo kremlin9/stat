@@ -24,6 +24,7 @@ class DefaultController extends Controller {
         
         $realtime = array();
         $banks = array();
+        $in_out = array();
 
         $mc = $this->get('beryllium_cache');
 
@@ -37,11 +38,19 @@ class DefaultController extends Controller {
             );
 
             $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
-            $banks[ $game ] = $bank;
+
+            $in  = $mc->get("in-$game") ? $mc->get("in-$game") : 0;
+            $out = $mc->get("out-$game") ? $mc->get("out-$game") : 0;
+
+            $in_out[$game]['in']  = $in;
+            $in_out[$game]['out'] = $out;
+
+            $banks[$game] = $bank;
         }
 
         return $this->render('StatGeneralBundle:Default:index.html.twig', array(
             'realtime' => $realtime,
+            'in_out' => $in_out,
             'banks' => $banks
         ));
     }
