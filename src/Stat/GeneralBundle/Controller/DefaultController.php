@@ -46,7 +46,7 @@ class DefaultController extends Controller {
 
             if ($renew) {
                 $mc->set("in-$game", 10000, 60 * 60 * 4);
-                $mc->set("out-$game", 9000, 60 * 60 * 4);
+                $mc->set("out-$game", -9000, 60 * 60 * 4);
             }
 
             $in  = $mc->get("in-$game") ? $mc->get("in-$game") : 0;
