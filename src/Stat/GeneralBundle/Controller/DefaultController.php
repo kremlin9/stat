@@ -54,6 +54,7 @@ class DefaultController extends Controller {
 
             $in_out[$game]['in']  = $in;
             $in_out[$game]['out'] = $out;
+            $in_out[$game]['out_p'] = sprintf("%.2f", $in ? $out * 100 / $in : 0);
             $in_out[$game]['diff'] = $in + $out;
             $in_out[$game]['diff_p'] = sprintf("%.2f", $in ? ($in + $out) * 100 / $in : 0);
 
