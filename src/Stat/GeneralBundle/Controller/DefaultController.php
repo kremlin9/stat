@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {
 
-    public function indexAction() {
+    public function indexAction(Request $r) {
+        $renew = $r->get('renew');
+
         # Get stat
         $rep = $this->getDoctrine()
             ->getRepository('StatGeneralBundle:Realtime');
@@ -38,6 +40,11 @@ class DefaultController extends Controller {
             );
 
             $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
+
+            if ($renew) {
+                $mc->set("in-$game", 10000, 60 * 60 * 4);
+                $mc->set("out-$game", 9000, 60 * 60 * 4);
+            }
 
             $in  = $mc->get("in-$game") ? $mc->get("in-$game") : 0;
             $out = $mc->get("out-$game") ? $mc->get("out-$game") : 0;
