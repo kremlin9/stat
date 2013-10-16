@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller {
 
     public function indexAction(Request $r) {
-        $renew = $r->get('renew');
+        $reset = $r->get('reset');
 
         # Get stat
         $rep = $this->getDoctrine()
@@ -44,9 +44,10 @@ class DefaultController extends Controller {
 
             $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
 
-            if ($renew) {
+            if ($reset) {
                 $mc->set("in-$game", 10000, 60 * 60 * 4);
                 $mc->set("out-$game", -9000, 60 * 60 * 4);
+                $mc->set("gb-$game", 10000);
             }
 
             $in  = $mc->get("in-$game") ? $mc->get("in-$game") : 0;
