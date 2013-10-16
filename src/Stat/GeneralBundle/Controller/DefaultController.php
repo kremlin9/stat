@@ -42,13 +42,13 @@ class DefaultController extends Controller {
                 'bonus_time' => $s->getBonusTime()
             );
 
-            $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
-
             if ($reset) {
                 $mc->set("in-$game", 10000, 60 * 60 * 4);
                 $mc->set("out-$game", -9000, 60 * 60 * 4);
                 $mc->set("gb-$game", 10000);
             }
+
+            $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
 
             $in  = $mc->get("in-$game") ? $mc->get("in-$game") : 0;
             $out = $mc->get("out-$game") ? $mc->get("out-$game") : 0;
