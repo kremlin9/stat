@@ -45,7 +45,7 @@ class DefaultController extends Controller {
             if ($reset) {
                 $mc->set("in-$game", 10000, 60 * 60 * 4);
                 $mc->set("out-$game", -9000, 60 * 60 * 4);
-                $mc->set("gb-$game", 10000);
+                $mc->set("gb-$game", 10000, 60 * 60 * 4);
             }
 
             $bank = $mc->get("gb-$game") ? $mc->get("gb-$game") : 0;
